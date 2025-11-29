@@ -21,8 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/register/', views.register, name='register'),
+    path('accounts/', include('allauth.urls')),
     path('wishlists/', views.wishlist_list, name='wishlist_list'),
     path('wishlists/<int:pk>/', views.wishlist_detail, name='wishlist_detail'),
 ]
