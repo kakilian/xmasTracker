@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="container py-4">
+  <!-- Hero Section -->
+  <section class="row justify-content-center mb-5">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6 text-center">
+      <div class="position-relative mb-4 rounded overflow-hidden shadow-sm">
+        <img src="{% static 'images/pages/tree.lights.house.png' %}" class="img-fluid w-100" alt="Lit Christmas tree in snowy garden" style="object-fit:cover;">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-3" style="background:linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05));">
+          <h1 class="h4 h-md-3 text-white fw-semibold mb-0">Wishlist Tracker</h1>
+        </div>
+      </div>
+      <p class="lead fw-semibold mx-auto mb-4 px-2 px-sm-3" style="max-width: 38rem;">
+        Create your Christmas Present Wishlists to track your family and friends gift wishes here with us!
+      </p>
+      <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+        <a href="/login/" class="btn btn-outline-primary btn-lg px-4 flex-sm-shrink-0">Login</a>
+        <a href="/register/" class="btn btn-primary btn-lg px-4 flex-sm-shrink-0">Register</a>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
