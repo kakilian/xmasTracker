@@ -20,11 +20,14 @@
       <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
         {% if request.user.is_authenticated %}
           <a href="{% url 'wishlist_list' %}" class="btn btn-primary btn-lg px-4 flex-sm-shrink-0">Go to your wishlists</a>
-          <a href="{% url 'logout' %}" class="btn btn-outline-secondary btn-lg px-4 flex-sm-shrink-0">Logout</a>
+          <form method="post" action="{% url 'logout' %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-secondary btn-lg px-4 flex-sm-shrink-0">Logout</button>
+          </form>
         {% else %}
           <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg px-4 flex-sm-shrink-0">Login</a>
           <a href="{% url 'password_reset' %}" class="btn btn-outline-secondary btn-lg px-4 flex-sm-shrink-0">Forgot Password</a>
-          <a href="/register/" class="btn btn-primary btn-lg px-4 flex-sm-shrink-0">Register</a>
+          <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-4 flex-sm-shrink-0">Register</a>
         {% endif %}
       </div>
     </div>
