@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+    <h1>Saved Gifts</h1>
+    {% for gift in gifts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5>{{ gift.title }}</h5>
+                <p class="text-muted">{{ gift.recipient_name }} • {{ gift.price_range }}</p>
+                <p>{{ gift.description }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p>No gifts saved yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
