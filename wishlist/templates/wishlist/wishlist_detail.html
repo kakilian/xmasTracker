@@ -32,7 +32,14 @@
             {% endif %}
           </div>
           <div class="text-end d-flex align-items-center gap-2">
-            <div>
+            <div class="d-flex flex-column align-items-end gap-1">
+              {% if item.priority == 1 %}
+                <span class="badge bg-danger">High Priority</span>
+              {% elif item.priority == 2 %}
+                <span class="badge bg-warning text-dark">Medium Priority</span>
+              {% else %}
+                <span class="badge bg-info text-dark">Low Priority</span>
+              {% endif %}
               <form method="post" action="{% url 'item_toggle_purchased' wishlist.pk item.pk %}" class="d-inline">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-sm {% if item.is_purchased %}btn-success{% else %}btn-outline-secondary{% endif %}" 
@@ -41,7 +48,6 @@
                   {{ item.is_purchased|yesno:'Purchased,Mark as Purchased' }}
                 </button>
               </form>
-              <div class="small text-muted mt-1">Priority: {{ item.priority }}</div>
             </div>
             <a href="{% url 'item_edit' wishlist.pk item.pk %}" class="btn btn-sm btn-outline-primary" title="Edit item">
               <i class="bi bi-pencil"></i>
