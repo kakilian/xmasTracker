@@ -56,7 +56,7 @@
                   </form>
                 </div>
                 <div class="d-flex gap-2">
-                  <a href="{% url 'item_edit' wishlist.pk item.pk %}" class="btn btn-sm btn-info" title="Edit item">
+                  <a href="{% url 'item_edit' wishlist.pk item.pk %}" class="btn btn-sm btn-outline-info" title="Edit item">
                     <i class="bi bi-pencil"></i>
                   </a>
                   <form method="post" action="{% url 'item_delete' wishlist.pk item.pk %}" class="d-inline">
