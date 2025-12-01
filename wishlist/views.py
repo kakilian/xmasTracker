@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Wishlist
 
@@ -21,3 +21,15 @@ def wishlist_detail(request, pk):
     """Show a single wishlist with its items."""
     wl = get_object_or_404(Wishlist, pk=pk, user=request.user)
     return render(request, "wishlist/wishlist_detail.html", {"wishlist": wl, "items": wl.items.all()})
+
+
+@login_required
+def wishlist_create(request):
+    """Create a new wishlist."""
+    if request.method == "POST":
+        title = request.POST.get("title")
+        person_name = request.POST.get("person_name")
+        if title and person_name:
+            Wishlist.objects.create(user=request.user, title=title, person_name=person_name)
+            return redirect("wishlist_list")
+    return render(request, "wishlist/wishlist_create.html")

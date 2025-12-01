@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Create Wishlist{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h1 class="mb-4">Create a New Wishlist</h1>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <form method="post" action="{% url 'wishlist_create' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="title" class="form-label">Wishlist Title</label>
+              <input type="text" class="form-control" id="title" name="title" 
+                     placeholder="e.g., Christmas 2025" required>
+            </div>
+            <div class="mb-3">
+              <label for="person_name" class="form-label">Person Name</label>
+              <input type="text" class="form-control" id="person_name" name="person_name" 
+                     placeholder="e.g., John" required>
+            </div>
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary">Create Wishlist</button>
+              <a href="{% url 'wishlist_list' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

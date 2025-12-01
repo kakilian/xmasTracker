@@ -4,7 +4,9 @@
 <main class="container py-4">
   <header class="mb-4 d-flex align-items-center justify-content-between">
     <h1 class="h4 mb-0">My Wishlists</h1>
-    <a class="btn btn-outline-secondary" href="/">Home</a>
+    <a class="btn btn-primary" href="{% url 'wishlist_create' %}">
+      <i class="bi bi-plus-circle"></i> Create Wishlist
+    </a>
   </header>
   {% if wishlists %}
     <div class="list-group">
@@ -19,7 +21,9 @@
       {% endfor %}
     </div>
   {% else %}
-    <div class="alert alert-info">No wishlists yet.</div>
+    <div class="alert alert-info">
+      No wishlists yet. <a href="{% url 'wishlist_create' %}" class="alert-link">Create your first wishlist!</a>
+    </div>
   {% endif %}
 </main>
 {% endblock %}

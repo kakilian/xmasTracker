@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('accounts/', include('allauth.urls')),
     path('wishlists/', views.wishlist_list, name='wishlist_list'),
+    path('wishlists/create/', views.wishlist_create, name='wishlist_create'),
     path('wishlists/<int:pk>/', views.wishlist_detail, name='wishlist_detail'),
 ]
