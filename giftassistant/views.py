@@ -1,8 +1,11 @@
 import json
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.conf import settings
 from openai import OpenAI
 from .models import SavedGift
+from wishlist.models import Wishlist, WishlistItem
 
 
 # Initialize OpenAI client if API key is available
@@ -70,13 +73,13 @@ def gift_assistant(request):
             "extraNotes": extra_notes,
         }
 
-        # Check if OpenAI client is available
+        # Check if OpenAI client is available - provide fallback suggestion
         if client is None:
             suggestions = [{
-                "title": "Gift Assistant Unavailable",
-                "description": "The OpenAI API key is not configured. Please contact the administrator to enable AI-powered gift suggestions.",
-                "priceRange": "N/A",
-                "type": "physical"
+                "title": "Cozy Tube Socks",
+                "description": "Everyone loves warm, comfortable tube socks! Perfect for the holiday season and keeping feet toasty during winter. A practical gift that's always appreciated.",
+                "priceRange": "$10-20",
+                "type": "Practical"
             }]
         else:
             try:
@@ -98,24 +101,36 @@ def gift_assistant(request):
                 print("OpenAI error:", e)
                 suggestions = []
 
-    return render(request, "giftassistant/assistant.html", {"suggestions": suggestions})
+    # Get user's wishlists for the dropdown
+    user_wishlists = []
+    if request.user.is_authenticated:
+        user_wishlists = Wishlist.objects.filter(user=request.user)
+
+    return render(request, "giftassistant/assistant.html", {
+        "suggestions": suggestions,
+        "wishlists": user_wishlists
+    })
 
 
+@login_required
 def save_gift(request):
     if request.method == 'POST':
-        recipient_name = request.POST.get('recipient_name')
+        wishlist_id = request.POST.get('wishlist_id')
         title = request.POST.get('title')
         description = request.POST.get('description')
         price_range = request.POST.get('priceRange')
-        gift_type = request.POST.get('type')
 
-        SavedGift.objects.create(
-            reciepient_name=recipient_name,
-            title=title,
-            description=description,
-            price_range=price_range,
-            gift_type=gift_type
-        )
+        if wishlist_id:
+            wishlist = get_object_or_404(Wishlist, pk=wishlist_id, user=request.user)
+            # Add as WishlistItem with description including price info
+            full_description = f"{title} ({price_range})"
+            WishlistItem.objects.create(
+                wishlist=wishlist,
+                description=full_description,
+                notes=description,
+                priority=3  # Default to low priority
+            )
+            messages.success(request, f'This item was saved to the wishlist for "{wishlist.person_name}".')
 
     return redirect("gift_assistant")
 
