@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Add Item{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h1 class="mb-4">Add Item to {{ wishlist.title }}</h1>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <form method="post" action="{% url 'item_create' wishlist.pk %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="description" class="form-label">Item Description *</label>
+              <input type="text" class="form-control" id="description" name="description" 
+                     placeholder="e.g., Blue sweater, size M" required>
+            </div>
+            <div class="mb-3">
+              <label for="url" class="form-label">Link (optional)</label>
+              <input type="url" class="form-control" id="url" name="url" 
+                     placeholder="https://example.com/product">
+            </div>
+            <div class="mb-3">
+              <label for="notes" class="form-label">Notes (optional)</label>
+              <textarea class="form-control" id="notes" name="notes" rows="3" 
+                        placeholder="Any additional details..."></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="priority" class="form-label">Priority</label>
+              <select class="form-select" id="priority" name="priority">
+                <option value="1">High Priority (Red)</option>
+                <option value="2">Medium Priority (Yellow)</option>
+                <option value="3" selected>Low Priority (Blue)</option>
+              </select>
+              <div class="form-text">Higher priority items appear first in the list</div>
+            </div>
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary">Add Item</button>
+              <a href="{% url 'wishlist_detail' wishlist.pk %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

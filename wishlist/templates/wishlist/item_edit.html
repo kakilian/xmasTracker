@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Item{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h1 class="mb-4">Edit Item in {{ wishlist.title }}</h1>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <form method="post" action="{% url 'item_edit' wishlist.pk item.pk %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="description" class="form-label">Item Description *</label>
+              <input type="text" class="form-control" id="description" name="description" 
+                     value="{{ item.description }}" required>
+            </div>
+            <div class="mb-3">
+              <label for="url" class="form-label">Link (optional)</label>
+              <input type="url" class="form-control" id="url" name="url" 
+                     value="{{ item.url }}">
+            </div>
+            <div class="mb-3">
+              <label for="notes" class="form-label">Notes (optional)</label>
+              <textarea class="form-control" id="notes" name="notes" rows="3">{{ item.notes }}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="priority" class="form-label">Priority</label>
+              <select class="form-select" id="priority" name="priority">
+                <option value="1" {% if item.priority == 1 %}selected{% endif %}>High Priority (Red)</option>
+                <option value="2" {% if item.priority == 2 %}selected{% endif %}>Medium Priority (Yellow)</option>
+                <option value="3" {% if item.priority == 3 %}selected{% endif %}>Low Priority (Blue)</option>
+              </select>
+              <div class="form-text">Higher priority items appear first in the list</div>
+            </div>
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <a href="{% url 'wishlist_detail' wishlist.pk %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

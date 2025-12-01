@@ -1,0 +1,198 @@
+/* Christmas Theme Styles */
+
+:root {
+  /* Classic Modern Christmas palette */
+  --christmas-red: #C1121F;
+  --christmas-green: #0B3D2E;
+  --christmas-frost: #F7EFEF;
+  --christmas-gold: #D4A373;
+  
+  /* Sleek Tech Christmas palette */
+  --tech-dark: #1A1D23;
+  --tech-blue: #3C7BF1;
+  --tech-light-blue: #AECBFA;
+  --tech-white: #F5F5F5;
+}
+
+/* Override Bootstrap primary color with Christmas red */
+.btn-primary {
+  background-color: var(--christmas-red);
+  border-color: var(--christmas-red);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #a00e1a;
+  border-color: #a00e1a;
+}
+
+.btn-outline-primary {
+  color: var(--christmas-red);
+  border-color: var(--christmas-red);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--christmas-red);
+  border-color: var(--christmas-red);
+  color: white;
+}
+
+/* Navbar Christmas styling */
+.navbar-dark.bg-primary {
+  background-color: var(--christmas-green) !important;
+}
+
+/* Badge colors */
+.badge.bg-primary {
+  background-color: var(--christmas-red) !important;
+}
+
+/* Links */
+a {
+  color: var(--christmas-red);
+}
+
+a:hover {
+  color: #a00e1a;
+}
+
+/* List group items hover */
+.list-group-item-action:hover {
+  background-color: var(--christmas-frost);
+  border-left: 3px solid var(--christmas-red);
+}
+
+/* Alert styling */
+.alert-info {
+  background-color: var(--tech-light-blue);
+  border-color: var(--tech-blue);
+  color: var(--tech-dark);
+}
+
+.alert-info .alert-link {
+  color: var(--christmas-red);
+  font-weight: 600;
+}
+
+/* Body background with subtle pattern */
+body.bg-light {
+  background-color: var(--christmas-frost) !important;
+}
+
+/* Footer Christmas styling - no white */
+footer {
+  background-color: var(--christmas-frost) !important;
+  border-top: 2px solid var(--christmas-gold) !important;
+}
+
+/* Card and list shadows with Christmas tint */
+.shadow-sm,
+.shadow {
+  box-shadow: 0 0.125rem 0.25rem rgba(193, 18, 31, 0.075) !important;
+}
+
+/* Priority badges */
+.badge.bg-danger {
+  background-color: var(--christmas-red) !important;
+}
+
+.badge.bg-warning {
+  background-color: var(--christmas-gold) !important;
+}
+
+.badge.bg-info {
+  background-color: var(--tech-blue) !important;
+  color: white !important;
+}
+
+/* Success button (purchased) */
+.btn-success {
+  background-color: var(--christmas-green);
+  border-color: var(--christmas-green);
+}
+
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #083026;
+  border-color: #083026;
+}
+
+/* Purchased item background */
+.list-group-item.bg-light {
+  background-color: rgba(212, 163, 115, 0.15) !important;
+}
+
+/* Home page hero overlay adjustment */
+.bg-dark.bg-opacity-50 {
+  background-color: rgba(11, 61, 46, 0.7) !important;
+}
+
+/* Form inputs focus state */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--christmas-red);
+  box-shadow: 0 0 0 0.25rem rgba(193, 18, 31, 0.25);
+}
+
+/* Card styling */
+.card {
+  border: 1px solid var(--christmas-gold);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  border: 1px solid var(--christmas-gold);
+}
+
+/* Navbar brand emphasis */
+.navbar-brand {
+  color: var(--christmas-gold) !important;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.navbar-brand strong {
+  font-size: 1.5rem;
+}
+
+/* Make navbar icons more visible */
+.navbar::after {
+  display: none;
+}
+
+/* Snow decoration - larger and more visible */
+.navbar .container-fluid::after {
+  content: '❄️ ✨ 🎄';
+  font-size: 1.5rem;
+  opacity: 0.8;
+  margin-left: 1rem;
+  vertical-align: middle;
+}
+
+@media (max-width: 576px) {
+  .navbar .container-fluid::after {
+    font-size: 1.25rem;
+  }
+}
+
+/* Remove white backgrounds */
+footer.bg-white {
+  background-color: var(--christmas-frost) !important;
+  border-top: 2px solid var(--christmas-gold) !important;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid var(--christmas-gold);
+}
+
+.list-group-item {
+  background-color: var(--christmas-frost);
+  border-color: var(--christmas-gold);
+}
+
+.list-group-item:hover {
+  background-color: rgba(212, 163, 115, 0.1) !important;
+  border-left: 3px solid var(--christmas-red);
+}
