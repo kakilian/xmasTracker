@@ -3,9 +3,14 @@
 {% block content %}
 <main class="container py-4">
   <a class="btn btn-link" href="{% url 'wishlist_list' %}">&larr; Back to My Wishlists</a>
-  <header class="mb-3">
-    <h1 class="h4 mb-1">{{ wishlist.title }}</h1>
-    <p class="text-muted mb-0">for {{ wishlist.person_name }}</p>
+  <header class="mb-3 d-flex justify-content-between align-items-center">
+    <div>
+      <h1 class="h4 mb-1">{{ wishlist.title }}</h1>
+      <p class="text-muted mb-0">for {{ wishlist.person_name }}</p>
+    </div>
+    <a class="btn btn-primary" href="{% url 'item_create' wishlist.pk %}">
+      <i class="bi bi-plus-circle"></i> Add Item
+    </a>
   </header>
 
   {% if items %}
@@ -31,7 +36,9 @@
     {% endfor %}
   </ul>
   {% else %}
-    <div class="alert alert-info">No items yet.</div>
+    <div class="alert alert-info">
+      No items yet. <a href="{% url 'item_create' wishlist.pk %}" class="alert-link">Add your first item!</a>
+    </div>
   {% endif %}
 </main>
 {% endblock %}

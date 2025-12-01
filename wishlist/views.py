@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Wishlist
+from .models import Wishlist, WishlistItem
 
 
 def index(request):
@@ -33,3 +33,24 @@ def wishlist_create(request):
             Wishlist.objects.create(user=request.user, title=title, person_name=person_name)
             return redirect("wishlist_list")
     return render(request, "wishlist/wishlist_create.html")
+
+
+@login_required
+def item_create(request, wishlist_pk):
+    """Add a new item to a wishlist."""
+    wishlist = get_object_or_404(Wishlist, pk=wishlist_pk, user=request.user)
+    if request.method == "POST":
+        description = request.POST.get("description")
+        url = request.POST.get("url", "")
+        notes = request.POST.get("notes", "")
+        priority = request.POST.get("priority", 3)
+        if description:
+            WishlistItem.objects.create(
+                wishlist=wishlist,
+                description=description,
+                url=url,
+                notes=notes,
+                priority=priority
+            )
+            return redirect("wishlist_detail", pk=wishlist_pk)
+    return render(request, "wishlist/item_create.html", {"wishlist": wishlist})
