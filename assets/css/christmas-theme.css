@@ -120,7 +120,7 @@ footer {
 
 /* Purchased item background */
 .list-group-item.bg-light {
-  background-color: rgba(247, 239, 239, 0.6) !important;
+  background-color: rgba(212, 163, 115, 0.15) !important;
 }
 
 /* Home page hero overlay adjustment */
@@ -188,9 +188,11 @@ footer.bg-white {
 }
 
 .list-group-item {
-  background-color: white;
+  background-color: var(--christmas-frost);
+  border-color: var(--christmas-gold);
 }
 
 .list-group-item:hover {
-  background-color: var(--christmas-frost) !important;
+  background-color: rgba(212, 163, 115, 0.1) !important;
+  border-left: 3px solid var(--christmas-red);
 }

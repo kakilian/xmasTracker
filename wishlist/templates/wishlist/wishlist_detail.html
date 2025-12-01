@@ -4,9 +4,11 @@
 <main class="container py-4 py-md-5">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10 col-xl-8">
-      <a class="btn btn-link ps-0 mb-3" href="{% url 'wishlist_list' %}">
-        <i class="bi bi-arrow-left"></i> Back to My Wishlists
-      </a>
+      <div class="mb-3">
+        <a class="btn btn-outline-secondary btn-sm" href="{% url 'wishlist_list' %}">
+          <i class="bi bi-arrow-left"></i> Back to My Wishlists
+        </a>
+      </div>
       <header class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 mb-4">
         <div>
           <h1 class="h3 mb-1">{{ wishlist.title }}</h1>
@@ -54,7 +56,7 @@
                   </form>
                 </div>
                 <div class="d-flex gap-2">
-                  <a href="{% url 'item_edit' wishlist.pk item.pk %}" class="btn btn-sm btn-outline-primary" title="Edit item">
+                  <a href="{% url 'item_edit' wishlist.pk item.pk %}" class="btn btn-sm btn-info" title="Edit item">
                     <i class="bi bi-pencil"></i>
                   </a>
                   <form method="post" action="{% url 'item_delete' wishlist.pk item.pk %}" class="d-inline">
