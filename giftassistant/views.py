@@ -5,7 +5,14 @@ from openai import OpenAI
 from .models import SavedGift
 
 
-client = OpenAI(api_key=settings.OPENAI_API_KEY)
+# Initialize OpenAI client if API key is available
+try:
+    if settings.OPENAI_API_KEY:
+        client = OpenAI(api_key=settings.OPENAI_API_KEY)
+    else:
+        client = None
+except Exception:
+    client = None
 
 
 SYSTEM_PROMPT = """
@@ -63,25 +70,33 @@ def gift_assistant(request):
             "extraNotes": extra_notes,
         }
 
-        try:
-            response = client.chat.completions.create(
-                model="gpt-4.1-mini",
-                messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user",
-                        "content": json.dumps(payload)},
-                ],
-                response_format={"type": "json_object"},
-                temperature=0.8,
-            )
+        # Check if OpenAI client is available
+        if client is None:
+            suggestions = [{
+                "title": "Gift Assistant Unavailable",
+                "description": "The OpenAI API key is not configured. Please contact the administrator to enable AI-powered gift suggestions.",
+                "priceRange": "N/A",
+                "type": "physical"
+            }]
+        else:
+            try:
+                response = client.chat.completions.create(
+                    model="gpt-4.1-mini",
+                    messages=[
+                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "user", "content": json.dumps(payload)},
+                    ],
+                    response_format={"type": "json_object"},
+                    temperature=0.8,
+                )
 
-            raw_content = response.choices[0].message.content
-            data = json.loads(raw_content)
-            suggestions = data.get("suggestions", [])
+                raw_content = response.choices[0].message.content
+                data = json.loads(raw_content)
+                suggestions = data.get("suggestions", [])
 
-        except Exception as e:
-            print("OpenAI error:", e)
-            suggestions = []
+            except Exception as e:
+                print("OpenAI error:", e)
+                suggestions = []
 
     return render(request, "giftassistant/assistant.html", {"suggestions": suggestions})
 
