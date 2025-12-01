@@ -11,6 +11,8 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Christmas Theme -->
+  <link rel="stylesheet" href="{% static 'css/christmas-theme.css' %}">
 
   {% block head %}{% endblock %}
 </head>
@@ -20,7 +22,7 @@
 
   {% block content %}{% endblock %}
 
-  <footer class="mt-auto py-4 border-top small text-center bg-white">
+  <footer class="mt-auto py-4 border-top small text-center">
     <div class="container">&copy; {{ now|default:2025 }} Wishlist Tracker</div>
   </footer>
 
