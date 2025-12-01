@@ -27,9 +27,9 @@ def wishlist_detail(request, pk):
 def wishlist_create(request):
     """Create a new wishlist."""
     if request.method == "POST":
-        title = request.POST.get("title")
         person_name = request.POST.get("person_name")
-        if title and person_name:
+        if person_name:
+            title = f"Gift ideas for {person_name}"
             Wishlist.objects.create(user=request.user, title=title, person_name=person_name)
             return redirect("wishlist_list")
     return render(request, "wishlist/wishlist_create.html")

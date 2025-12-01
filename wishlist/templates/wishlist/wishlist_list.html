@@ -12,10 +12,7 @@
     <div class="list-group">
       {% for wl in wishlists %}
         <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{% url 'wishlist_detail' wl.pk %}">
-          <div>
-            <div class="fw-semibold">{{ wl.title }}</div>
-            <small class="text-muted">for {{ wl.person_name }}</small>
-          </div>
+          <div class="fw-semibold">{{ wl.title }}</div>
           <span class="badge bg-primary rounded-pill">{{ wl.items.count }}</span>
         </a>
       {% endfor %}
