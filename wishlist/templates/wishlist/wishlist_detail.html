@@ -14,9 +14,14 @@
           <h1 class="h3 mb-1">{{ wishlist.title }}</h1>
           <p class="text-muted mb-0">for {{ wishlist.person_name }}</p>
         </div>
-        <a class="btn btn-primary" href="{% url 'item_create' wishlist.pk %}">
-          <i class="bi bi-plus-circle"></i> Add Item
-        </a>
+        <div class="d-flex gap-2 flex-wrap">
+          <a class="btn btn-outline-secondary" href="{% url 'gift_assistant' %}">
+            🎁 Gift Assistant
+          </a>
+          <a class="btn btn-primary" href="{% url 'item_create' wishlist.pk %}">
+            <i class="bi bi-plus-circle"></i> Add Item
+          </a>
+        </div>
       </header>
 
       {% if items %}
