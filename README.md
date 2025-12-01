@@ -1,6 +1,8 @@
 # xmasTracker
 Personal Christmas Wishlist Manager with AI Gift Assistant
 
+🎄 **[Live Demo](https://xmastracker.onrender.com/)** 🎄
+
 ## Purpose
 
 xmasTracker is a Django-based web application designed to simplify Christmas gift planning and shopping. The platform helps users organize gift ideas for multiple people, track purchases, and get AI-powered gift suggestions. Built with a festive Christmas theme, it combines practical wishlist management with intelligent gift recommendations to make holiday shopping stress-free and organized.
