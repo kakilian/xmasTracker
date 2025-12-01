@@ -54,3 +54,25 @@ def item_create(request, wishlist_pk):
             )
             return redirect("wishlist_detail", pk=wishlist_pk)
     return render(request, "wishlist/item_create.html", {"wishlist": wishlist})
+
+
+@login_required
+def item_delete(request, wishlist_pk, item_pk):
+    """Delete an item from a wishlist."""
+    wishlist = get_object_or_404(Wishlist, pk=wishlist_pk, user=request.user)
+    item = get_object_or_404(WishlistItem, pk=item_pk, wishlist=wishlist)
+    if request.method == "POST":
+        item.delete()
+        return redirect("wishlist_detail", pk=wishlist_pk)
+    return redirect("wishlist_detail", pk=wishlist_pk)
+
+
+@login_required
+def item_toggle_purchased(request, wishlist_pk, item_pk):
+    """Toggle the purchased status of an item."""
+    wishlist = get_object_or_404(Wishlist, pk=wishlist_pk, user=request.user)
+    item = get_object_or_404(WishlistItem, pk=item_pk, wishlist=wishlist)
+    if request.method == "POST":
+        item.is_purchased = not item.is_purchased
+        item.save()
+    return redirect("wishlist_detail", pk=wishlist_pk)
