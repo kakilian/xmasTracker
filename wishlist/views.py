@@ -76,3 +76,23 @@ def item_toggle_purchased(request, wishlist_pk, item_pk):
         item.is_purchased = not item.is_purchased
         item.save()
     return redirect("wishlist_detail", pk=wishlist_pk)
+
+
+@login_required
+def item_edit(request, wishlist_pk, item_pk):
+    """Edit an existing item in a wishlist."""
+    wishlist = get_object_or_404(Wishlist, pk=wishlist_pk, user=request.user)
+    item = get_object_or_404(WishlistItem, pk=item_pk, wishlist=wishlist)
+    if request.method == "POST":
+        description = request.POST.get("description")
+        url = request.POST.get("url", "")
+        notes = request.POST.get("notes", "")
+        priority = request.POST.get("priority", 3)
+        if description:
+            item.description = description
+            item.url = url
+            item.notes = notes
+            item.priority = priority
+            item.save()
+            return redirect("wishlist_detail", pk=wishlist_pk)
+    return render(request, "wishlist/item_edit.html", {"wishlist": wishlist, "item": item})
