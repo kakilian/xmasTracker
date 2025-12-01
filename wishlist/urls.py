@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
+    path("", include("giftassistant.urls")),
     path('accounts/', include('allauth.urls')),
     path('wishlists/', views.wishlist_list, name='wishlist_list'),
     path('wishlists/create/', views.wishlist_create, name='wishlist_create'),
